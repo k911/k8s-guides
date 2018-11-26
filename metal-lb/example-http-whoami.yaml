@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-http-whoami
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: example-http-whoami
+  template:
+    metadata:
+      labels:
+        app: example-http-whoami
+    spec:
+      containers:
+      - name: example-http-whoami
+        image: containous/whoami
+        resources:
+          limits:
+            cpu: 100m
+            memory: 64Mi
+          requests:
+            cpu: 50m
+            memory: 48Mi
+        ports:
+        - name: http
+          containerPort: 80
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: example-http-whoami
+spec:
+  type: LoadBalancer
+  selector:
+    app: example-http-whoami
+  ports:
+  - port: 80
+    targetPort: http
+

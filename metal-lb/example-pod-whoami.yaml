@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-pod-whoami
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: example-pod-whoami
+  template:
+    metadata:
+      labels:
+        app: example-pod-whoami
+    spec:
+      containers:
+      - name: example-pod-whoami
+        image: jwilder/whoami
+        resources:
+          limits:
+            cpu: 100m
+            memory: 64Mi
+          requests:
+            cpu: 50m
+            memory: 48Mi
+        ports:
+        - name: http
+          containerPort: 8000
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: example-pod-whoami
+spec:
+  type: LoadBalancer
+  selector:
+    app: example-pod-whoami
+  ports:
+  - port: 80
+    targetPort: http
+
