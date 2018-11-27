@@ -1,0 +1,28 @@
+image: traefik
+imageTag: 1.7.4
+replicas: 2
+
+# For AWS see: https://github.com/kubernetes/kubernetes/blob/master/pkg/cloudprovider/providers/aws/aws.go
+# service:
+#   annotations:
+#     service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
+
+ssl:
+  enabled: true
+
+rbac:
+  enabled: true
+
+dashboard:
+  enabled: true
+
+accessLogs:
+  enabled: true
+
+gzip:
+  enabled: true
+
+# proxyProtocol:
+#   enabled: true
+#   trustedIPs:
+#     - 0.0.0.0/0
