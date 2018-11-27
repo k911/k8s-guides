@@ -1,4 +1,5 @@
 # Kubernetes Dashboard
+https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
 
 ## Installation
 
@@ -12,4 +13,12 @@ Accessing (kubectl proxy): http://localhost:8001/api/v1/namespaces/kube-system/s
 
 ```bash
 helm upgrade k8s-dashboard stable/kubernetes-dashboard -f ./values.yaml
+```
+
+## Minikube
+If you're using `Minikube`, it deploys kubernetes dashboard automatically.
+
+To access it run:
+```bash
+minikube dashboard
 ```

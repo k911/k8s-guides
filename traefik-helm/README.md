@@ -1,5 +1,6 @@
 # Traefik
-Application Load Balancer
+Traefik is a modern HTTP reverse proxy and load balancer that makes deploying microservices easy.
+https://traefik.io/
 
 ## Prerequisites
 
@@ -48,7 +49,7 @@ Source: https://docs.traefik.io/user-guide/kubernetes/
 
     You can also see that each frontend will have defined 2 backends, that means `Treafik` will load balance beetwen pods, but we cannot access yet this adresses, because they are exposed only in k8s-cluster.
 
-3. To access them we have to get `Treafik` service `LoadBalancer` IP (requires [Meta LB](../metal-lb/README.md) for bare-metal clusters like minikube)
+3. To access them we have to get `Treafik` service `LoadBalancer` IP (requires [Metal LB](../metal-lb/README.md) for bare-metal clusters like minikube)
 
     ```bash
     kubectl get svc traefik --namespace kube-system   
