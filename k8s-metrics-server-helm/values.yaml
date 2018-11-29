@@ -1,0 +1,4 @@
+args:
+    - --logtostderr
+    - --kubelet-insecure-tls # when using self-signed kubelet certificate
+    - --kubelet-preferred-address-types=InternalIP
