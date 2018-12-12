@@ -1,3 +1,51 @@
+elasticsearch:
+  appVersion: "6.5.1"
+  cluster:
+    name: "elasticsearch"
+    xpackEnable: false
+    env:
+      MINIMUM_MASTER_NODES: "1"
+
+  client:
+    replicas: 1
+    heapSize: "256m"
+    resources:
+      limits:
+        cpu: "500m"
+      requests:
+        cpu: "25m"
+        memory: "256Mi"
+
+  master:
+    replicas: 1
+    heapSize: "256m"
+    resources:
+      limits:
+        cpu: "500m"
+      requests:
+        cpu: "25m"
+        memory: "256Mi"
+    persistence:
+      enabled: true
+      name: data
+      size: "2Gi"
+      # storageClass: "gp2"
+
+  data:
+    replicas: 1
+    heapSize: "512m"
+    resources:
+      limits:
+        cpu: 1
+      requests:
+        cpu: "25m"
+        memory: "512Mi"
+    persistence:
+      enabled: true
+      name: data
+      size: "20Gi"
+      # storageClass: "gp2"
+
 kibana:
   env:
     ELASTICSEARCH_URL: http://es-elasticsearch-client:9200
