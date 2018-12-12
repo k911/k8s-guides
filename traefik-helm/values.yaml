@@ -1,5 +1,5 @@
 image: traefik
-imageTag: 1.7.4
+imageTag: 1.7.5
 replicas: 2
 
 # For AWS see: https://github.com/kubernetes/kubernetes/blob/master/pkg/cloudprovider/providers/aws/aws.go
@@ -21,6 +21,20 @@ accessLogs:
 
 gzip:
   enabled: true
+
+acme:
+  enabled: true
+  persistence:
+    enabled: false
+
+kvprovider:
+  etcd:
+    endpoint: kv-store-client:2379
+    useAPIV3: true
+    watch: true
+    prefix: traefik
+  storeAcme: true
+  importAcme: false
 
 # proxyProtocol:
 #   enabled: true

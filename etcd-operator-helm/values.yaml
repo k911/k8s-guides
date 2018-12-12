@@ -1,0 +1,15 @@
+rbac:
+  create: true
+
+deployments:
+  etcdOperator: true
+  backupOperator: false
+  restoreOperator: false
+
+customResources:
+  createEtcdClusterCRD: true
+
+etcdCluster:
+  name: kv-store
+  size: 3
+  version: 3.2.13

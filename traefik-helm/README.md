@@ -7,10 +7,10 @@ https://traefik.io/
 - [Helm](../helm/README.md) for `stable/traefik` chart installation
 - (Optional) [Meta LB](../metal-lb/README.md) for `LoadBalancer` service support on bare-metal clusters
 
-## Installation
+## Installation/Upgrading
 
 ```bash
-helm install stable/traefik --namespace kube-system --name traefik -f values.yaml
+helm upgrade --install traefik stable/traefik --namespace infrastructure -f ./values.yaml
 ```
 
 Accessing (kubectl proxy): 
