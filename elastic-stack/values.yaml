@@ -1,0 +1,35 @@
+kibana:
+  env:
+    ELASTICSEARCH_URL: http://es-elasticsearch-client:9200
+
+logstash:
+  enabled: false
+
+filebeat:
+  enabled: false
+
+fluentd:
+  enabled: false
+
+fluent-bit:
+  enabled: true
+  backend:
+    type: es
+    es:
+      host: es-elasticsearch-client
+      port: 9200
+      index: kubernetes_cluster
+      time_key: "@timestamp"
+      logstash_prefix: kubernetes_cluster
+
+fluentd-elasticsearch:
+  enabled: false
+
+nginx-ldapauth-proxy:
+  enabled: false
+
+elasticsearch-curator:
+  enabled: false
+
+elasticsearch-exporter:
+  enabled: false
