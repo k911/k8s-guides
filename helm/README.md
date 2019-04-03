@@ -1,7 +1,17 @@
 # Helm
+
 Kubernetes package manager
 
+## Guides
+
+- [Kubernetes Dashboard](./k8s-dashboard/README.md)
+- [Metal LB](./metal-lb/README.md)
+- [Metrics Server](./metrics-server/README.md)
+- [Traefik](./traefik/README.md)
+- [External DNS](./external-dns/README.md)
+
 ## Installation
+
 https://docs.helm.sh/using_helm/#quickstart-guide
 
 ## RBAC Tiller Installation

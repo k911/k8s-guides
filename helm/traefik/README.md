@@ -1,4 +1,5 @@
 # Traefik
+
 Traefik is a modern HTTP reverse proxy and load balancer that makes deploying microservices easy.
 https://traefik.io/
 
@@ -23,6 +24,7 @@ helm upgrade traefik stable/traefik -f values.yaml
 ```
 
 ## Example
+
 Source: https://docs.traefik.io/user-guide/kubernetes/
 
 1. Deploy some resources to the cluster:
@@ -43,8 +45,9 @@ Source: https://docs.traefik.io/user-guide/kubernetes/
     ```bash
     kubectl proxy
     ```
+
     Visit: http://127.0.0.1:8001/api/v1/namespaces/kube-system/services/traefik-dashboard/proxy/dashboard/
-    
+
     You should see some frontends and backends: `stilton.minikube`, `wensleydale.minikube`, `cheddar.minikube`.
 
     You can also see that each frontend will have defined 2 backends, that means `Treafik` will load balance beetwen pods, but we cannot access yet this adresses, because they are exposed only in k8s-cluster.

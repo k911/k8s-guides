@@ -1,9 +1,12 @@
 # Kubernetes Guides
+
 Guides to deploying different services on different k8s clusters
 
-## Guides
+## Helm Guides
 
-- [Helm](./helm/README.md)
-- [Kubernetes Dashboard](./k8s-dashboard-helm/README.md)
-- [Metal LB](./metal-lb/README.md)
-- [Traefik](./traefik-helm/README.md)
+- [Helm - Installation](./helm/README.md#Installation)
+- [Kubernetes Dashboard](./helm/k8s-dashboard/README.md)
+- [Metal LB](./helm/metal-lb/README.md)
+- [Metrics Server](./helm/metrics-server/README.md)
+- [Traefik](./helm/traefik/README.md)
+- [External DNS](./helm/external-dns/README.md)
