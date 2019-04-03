@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: traefik-dashboard-basic-auth
+type: Opaque
+data:
+  htaccess: |-
+    # base64 encoded basic auth:
+    #
+    # ```bash
+    # echo $(htpasswd -n -b "admin" "admin") -n | base64
+    # ```
+    YWRtaW46JGFwcjEkbjZUUS5nRU0kOW5tYWExNVlJRXVWN0pHUmRPckhULiAtbgo=

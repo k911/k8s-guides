@@ -7,7 +7,7 @@ https://github.com/kubernetes-incubator/external-dns
 ## Installation / Upgrading
 
 ```bash
-helm upgrade --install stable/external-dns --name external-dns -f ./values.yaml
+helm upgrade --install external-dns stable/external-dns -f ./values.yaml
 ```
 
 ## Example configuration

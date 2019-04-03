@@ -7,7 +7,7 @@ Kubernetes package manager
 - [Kubernetes Dashboard](./k8s-dashboard/README.md)
 - [Metal LB](./metal-lb/README.md)
 - [Metrics Server](./metrics-server/README.md)
-- [Traefik](./traefik/README.md)
+- [Traefik Cluster](./traefik/README.md)
 - [External DNS](./external-dns/README.md)
 
 ## Installation

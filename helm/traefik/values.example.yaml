@@ -1,0 +1,114 @@
+image: traefik
+imageTag: 1.7.10
+replicas: 3
+
+serviceType: LoadBalancer
+
+ssl:
+  enabled: true
+  enforced: true
+  permanentRedirect: true
+  insecureSkipVerify: true
+
+rbac:
+  enabled: true
+
+dashboard:
+  enabled: true
+  domain: "traefik-dashboard.example.com" # change here
+  auth: {}
+  ingress:
+    annotations:
+      kubernetes.io/ingress.class: "traefik"
+      ingress.kubernetes.io/auth-type: "basic"
+      ingress.kubernetes.io/auth-secret: "traefik-dashboard-basic-auth"
+
+traefikLogFormat: json
+accessLogs:
+  enabled: true
+  format: json
+  fields:
+    headers:
+      names:
+        Authorization: redact
+        Cookie: drop
+
+metrics:
+  prometheus:
+    enabled: true
+
+kubernetes:
+  ingressClass: traefik
+  ingressEndpoint:
+    useDefaultPublishedService: true
+
+cpuRequest: 50m
+memoryRequest: 32Mi
+memoryLimit: 96Mi
+debug:
+  enabled: false
+
+podDisruptionBudget:
+  minAvailable: 1
+
+gzip:
+  enabled: true
+
+acme:
+  enabled: true
+  persistence:
+    enabled: false
+  challengeType: "dns-01"
+  email: "devops@example.com"
+  staging: true # change to `false` to get real Let's Encrypt certificates
+  logging: true
+  domains:
+    enabled: true
+    domainsList:
+      - main: "*.example.com" # change this
+      - sans:
+          - "example.com" # change this
+  dnsProvider:
+    name: route53
+    # Required AWS IAM permissions:
+    # https://github.com/xenolf/lego#aws-route-53
+    route53:
+      AWS_ACCESS_KEY_ID: XXXXXXXXXX # AWS IAM User Access Key
+      AWS_SECRET_ACCESS_KEY: XXXXXXXXXX # AWS IAM User Secret Key
+      AWS_REGION: eu-west-2 # AWS Region
+      AWS_HOSTED_ZONE_ID: XXXXXXXXXX # AWS Route53 hosted zone to get acme certificates
+
+kvprovider:
+  zookeeper:
+    endpoint: traefik-kv-store-zookeeper:2181
+    watch: true
+    prefix: traefik
+  storeAcme: true
+  importAcme: false
+
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app: traefik
+              release: ingress-controller
+          topologyKey: kubernetes.io/hostname
+
+# to configure autoscalling uncomment:
+#
+# autoscaling:
+#   minReplicas: 3
+#   maxReplicas: 9
+#   metrics:
+#   - type: Resource
+#     resource:
+#       name: cpu
+#       targetAverageUtilization: 60
+#   - type: Resource
+#     resource:
+#       name: memory
+#       targetAverageUtilization: 60
+#

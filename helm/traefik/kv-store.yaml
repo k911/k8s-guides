@@ -1,0 +1,47 @@
+replicaCount: 3
+
+podDisruptionBudget:
+  maxUnavailable: 1
+
+updateStrategy:
+  type: RollingUpdate
+
+image:
+  repository: gcr.io/google_samples/k8szk
+  tag: v3
+
+podAnnotations: {}
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    memory: 128Mi
+
+persistence:
+  enabled: true
+  size: 1Gi
+
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app: zookeeper
+              release: kv-store
+          topologyKey: kubernetes.io/hostname
+    # ---
+    # harder affanity configuration, but requires at least 3 different kubernetes nodes:
+    #
+    # requiredDuringSchedulingIgnoredDuringExecution:
+    #   - topologyKey: "kubernetes.io/hostname"
+    #     labelSelector:
+    #       matchLabels:
+    #         app: zookeeper
+    #         release: kv-store
+
+env:
+  ZK_HEAP_SIZE: 128M

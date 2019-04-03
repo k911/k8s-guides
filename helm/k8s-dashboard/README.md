@@ -5,7 +5,7 @@ https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
 ## Installation / Upgrading
 
 ```bash
-helm upgrade --install stable/kubernetes-dashboard --name k8s-dashboard -f ./values.yaml
+helm upgrade --install k8s-dashboard stable/kubernetes-dashboard -f ./values.yaml
 ```
 
 Accessing (kubectl proxy): http://localhost:8001/api/v1/namespaces/kube-system/services/https:k8s-dashboard-kubernetes-dashboard:/proxy/#!/login 
