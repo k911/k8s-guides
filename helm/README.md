@@ -9,6 +9,7 @@ Kubernetes package manager
 - [Metrics Server](./metrics-server/README.md)
 - [Traefik Cluster](./traefik/README.md)
 - [External DNS](./external-dns/README.md)
+- [Harbor](./harbor/README.md)
 
 ## Installation
 
@@ -18,7 +19,7 @@ https://docs.helm.sh/using_helm/#quickstart-guide
 
 ```bash
 kubectl apply -f ./helm.yaml
-helm init --service-account tiller
+helm init --service-account tiller --upgrade
 ```
 
 ## Upgrading

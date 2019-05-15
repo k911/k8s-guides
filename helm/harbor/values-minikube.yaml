@@ -1,0 +1,130 @@
+
+expose:
+  type: nodePort
+  tls:
+    commonName: minikube
+  nodePort:
+    name: harbor
+    ports:
+      http:
+        # The service port Harbor listens on when serving with HTTP
+        port: 80
+        # The node port Harbor listens on when serving with HTTP
+        nodePort: 31080
+      https:
+        # The service port Harbor listens on when serving with HTTPS
+        port: 443
+        # The node port Harbor listens on when serving with HTTPS
+        nodePort: 31443
+      # Only needed when notary.enabled is set to true
+      notary:
+        # The service port Notary listens on
+        port: 4443
+        # The node port Notary listens on
+        nodePort: 31444
+
+persistance:
+  enabled: true
+  resourcePolicy: ""
+  persistentVolumeClaim:
+    registry:
+      size: 1Gi
+    chartmuseum:
+      size: 1Gi
+    jobservice:
+      size: 1Gi
+    database:
+      size: 1Gi
+    redis:
+      size: 1Gi
+
+imageChartStorage:
+  type: filesystem
+  filesystem:
+    rootdirectory: /storage
+    #maxthreads: 100
+
+harborAdminPassword: "HarborMinikube"
+secretKey: "not-4-s3cure-k3y"
+
+nginx:
+  image:
+    repository: goharbor/nginx-photon
+    tag: v1.7.5
+  replicas: 1
+
+
+portal:
+  image:
+    repository: goharbor/harbor-portal
+    tag: v1.7.5
+  replicas: 1
+
+core:
+  image:
+    repository: goharbor/harbor-core
+    tag: v1.7.5
+  replicas: 1
+
+adminserver:
+  image:
+    repository: goharbor/harbor-adminserver
+    tag: v1.7.5
+  replicas: 1
+
+jobservice:
+  image:
+    repository: goharbor/harbor-jobservice
+    tag: v1.7.5
+  replicas: 1
+  maxJobWorkers: 10
+  jobLogger: stdout
+
+registry:
+  registry:
+    image:
+      repository: goharbor/registry-photon
+      tag: v2.6.2-v1.7.5
+  controller:
+    image:
+      repository: goharbor/harbor-registryctl
+      tag: v1.7.5
+  replicas: 3
+
+chartmuseum:
+  enabled: false
+  image:
+    repository: goharbor/chartmuseum-photon
+    tag: v0.8.1-v1.7.5
+  replicas: 1
+
+clair:
+  enabled: true
+  image:
+    repository: goharbor/clair-photon
+    tag: v2.0.8-v1.7.5
+  replicas: 1
+  # The http(s) proxy used to update vulnerabilities database from internet
+  httpProxy:
+  httpsProxy:
+  # The interval of clair updaters, the unit is hour, set to 0 to
+  # disable the updaters
+  updatersInterval: 12
+
+notary:
+  enabled: false
+
+database:
+  type: internal
+  internal:
+    image:
+      repository: goharbor/harbor-db
+      tag: v1.7.5
+    password: "admin"
+
+redis:
+  type: internal
+  internal:
+    image:
+      repository: goharbor/redis-photon
+      tag: v1.7.5
